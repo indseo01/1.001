@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IndSeo01 Industries | Weapon Intelligence</title>
+  <link rel="icon" type="image/png" href="https://drive.google.com/thumbnail?id=1cNHG2vlNgLNIHCVdKUl3oO1LpjUM5BWp">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
+    body { background: #0f0f0f; color: #f5f5f5; line-height: 1.6; }
+    header { background: #111; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; }
+    header h1 { font-size: 1.5rem; color: #0ff; margin-left: 10px; }
+    header .logo-container { display: flex; align-items: center; }
+    header img.logo { width: 40px; height: 40px; border-radius: 5px; }
+    nav a { margin-left: 20px; color: #ccc; text-decoration: none; }
+    nav a:hover { color: #0ff; }
+
+    .hero { height: 90vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 2rem; background: url('https://images.unsplash.com/photo-1608379867233-70da6d56bb49') no-repeat center center/cover; }
+    .hero h2 { font-size: 2.5rem; margin-bottom: 1rem; color: #0ff; text-shadow: 2px 2px 10px #000; }
+    .hero p { max-width: 600px; margin-bottom: 1.5rem; font-size: 1.2rem; background: rgba(0,0,0,0.5); padding: 1rem; border-radius: 10px; }
+    .btn { padding: 0.7rem 1.5rem; border: none; background: #0ff; color: #000; font-weight: bold; cursor: pointer; border-radius: 5px; }
+    .btn:hover { background: #09c; color: #fff; }
+
+    section { padding: 3rem 2rem; }
+    .about, .services { max-width: 1000px; margin: auto; }
+    .about h3, .services h3 { color: #0ff; margin-bottom: 1rem; font-size: 1.8rem; }
+
+    .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; }
+    .card { background: #1a1a1a; padding: 1.5rem; border-radius: 10px; box-shadow: 0 0 10px rgba(0,255,255,0.3); }
+    .card h4 { margin-bottom: 0.5rem; color: #0ff; }
+
+    .login-section { background: #111; padding: 3rem 2rem; text-align: center; }
+    .login-box, .signup-box { background: #1a1a1a; padding: 2rem; max-width: 400px; margin: auto; border-radius: 10px; box-shadow: 0 0 15px rgba(0,255,255,0.3); }
+    .login-box h3, .signup-box h3 { margin-bottom: 1.5rem; color: #0ff; }
+    .login-box input, .signup-box input { width: 100%; padding: 0.7rem; margin: 0.5rem 0; border: none; border-radius: 5px; }
+    .login-box button, .signup-box button { width: 100%; margin-top: 1rem; }
+    .message { margin-top: 10px; font-weight: bold; }
+    .toggle-link { margin-top: 10px; display: block; text-align: center; color: #0ff; cursor: pointer; }
+    .toggle-link:hover { text-decoration: underline; }
+
+    footer { background: #111; padding: 1rem; text-align: center; font-size: 0.9rem; color: #888; }
+
+    @media (max-width: 768px) {
+      .hero h2 { font-size: 1.8rem; }
+      .hero p { font-size: 1rem; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo-container">
+      <img class="logo" src="https://drive.google.com/thumbnail?id=1cNHG2vlNgLNIHCVdKUl3oO1LpjUM5BWp" alt="IndSeo01 Logo">
+      <h1>IndSeo01 Industries</h1>
+    </div>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="#login">Login</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <p><U>THE WEBSITE IS CURRENTLY UNDER MAINTAINANCE </U></p>
+    <h2>Weapon Intelligence for the Future</h2>
+    <p>IndSeo01 Industries pioneers in weapon intelligence solutions, combining advanced analytics, AI, and real-time defense technologies to secure tomorrow’s battlefield.</p>
+    <button class="btn">Explore More</button>
+  </section>
+
+  <section id="about" class="about">
+    <h3>About Us</h3>
+    <p>At IndSeo01 Industries, we focus on the research, design, and deployment of advanced weapon intelligence systems. Our mission is to merge data science and defense to empower nations with cutting-edge technology.</p>
+  </section>
+
+  <section id="services" class="services">
+    <h3>Our Services</h3>
+    <div class="services-grid">
+      <div class="card">
+        <h4>AI-Powered Surveillance</h4>
+        <p>Smart monitoring systems with predictive threat detection.</p>
+      </div>
+      <div class="card">
+        <h4>Autonomous Defense</h4>
+        <p>Weapon systems integrated with real-time decision making.</p>
+      </div>
+      <div class="card">
+        <h4>Cyber-Intelligence</h4>
+        <p>Cyber defense frameworks safeguarding critical weapon data.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="login" class="login-section">
+    <!-- Login Form -->
+    <div class="login-box" id="login-box">
+      <h3>Login</h3>
+      <input type="text" id="username" placeholder="Username" required />
+      <input type="password" id="password" placeholder="Password" required />
+      <button class="btn" onclick="login()">Login</button>
+      <p class="message" id="login-message"></p>
+      <span class="toggle-link" onclick="showSignUp()">Don't have an account? Sign Up</span>
+    </div>
+
+    <!-- Signup Form -->
+    <div class="signup-box" id="signup-box" style="display:none;">
+      <h3>Sign Up</h3>
+      <input type="text" id="new-username" placeholder="Choose Username" required />
+      <input type="password" id="new-password" placeholder="Choose Password" required />
+      <button class="btn" onclick="signUp()">Sign Up</button>
+      <p class="message" id="signup-message"></p>
+      <span class="toggle-link" onclick="showLogin()">Already have an account? Login</span>
+    </div>
+  </section>
+
+  <footer id="contact">
+    <p>Contact: Indseo01@outlook.com.com | © 2025 IndSeo01 Industries</p>
+  </footer>
+
+  <script>
+    // Toggle between Login and Sign-Up forms
+    function showSignUp() {
+      document.getElementById('login-box').style.display = 'none';
+      document.getElementById('signup-box').style.display = 'block';
+    }
+
+    function showLogin() {
+      document.getElementById('signup-box').style.display = 'none';
+      document.getElementById('login-box').style.display = 'block';
+    }
+
+    // Login Function
+    function login() {
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+
+      const storedUsername = localStorage.getItem('username');
+      const storedPassword = localStorage.getItem('password');
+
+      if (username === storedUsername && password === storedPassword) {
+        alert("Login successful! Redirecting...");
+        window.location.href = "i1.html"; // change destination page
+      } else {
+        document.getElementById('login-message').textContent = "Invalid username or password.";
+        document.getElementById('login-message').style.color = "red";
+      }
+    }
+
+    // Sign-Up Function
+    function signUp() {
+      const newUsername = document.getElementById('new-username').value;
+      const newPassword = document.getElementById('new-password').value;
+
+      if (newUsername && newPassword) {
+        localStorage.setItem('username', newUsername);
+        localStorage.setItem('password', newPassword);
+
+        document.getElementById('signup-message').textContent = "Account created successfully!";
+        document.getElementById('signup-message').style.color = "green";
+
+        setTimeout(showLogin, 2000);
+      } else {
+        document.getElementById('signup-message').textContent = "Please fill in all fields.";
+        document.getElementById('signup-message').style.color = "red";
+      }
+    }
+  </script>
+</body>
+</html>
