@@ -1,125 +1,281 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>IndSeo01 Industries | Weapon Intelligence</title>
-  <link rel="icon" type="image/png" href="https://drive.google.com/thumbnail?id=1cNHG2vlNgLNIHCVdKUl3oO1LpjUM5BWp">
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
-    body { background: #0f0f0f; color: #f5f5f5; line-height: 1.6; }
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>IndSeo01 Industries | Weapon Intelligence</title>
+    <link rel="icon" type="image/png" href="https://drive.google.com/thumbnail?id=1cNHG2vlNgLNIHCVdKUl3oO1LpjUM5BWp">
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
+      body { background: #0f0f0f; color: #f5f5f5; line-height: 1.6; }
+      header { background: #111; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; }
+      header h1 { font-size: 1.5rem; color: #0ff; margin-left: 10px; }
+      header .logo-container { display: flex; align-items: center; }
+      header img.logo { width: 40px; height: 40px; border-radius: 5px; }
+      nav a { margin-left: 20px; color: #ccc; text-decoration: none; }
+      nav a:hover { color: #0ff; }
 
-    header { background: #111; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; }
-    header h1 { font-size: 1.5rem; color: #0ff; margin-left: 10px; }
-    header img.logo { width: 40px; height: 40px; border-radius: 5px; }
-    nav a { margin-left: 20px; color: #ccc; text-decoration: none; }
-    nav a:hover { color: #0ff; }
+      .hero { height: 90vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 2rem; background: url('https://images.unsplash.com/photo-1608379867233-70da6d56bb49') no-repeat center center/cover; }
+      .hero h2 { font-size: 2.5rem; margin-bottom: 1rem; color: #0ff; text-shadow: 2px 2px 10px #000; }
+      .hero p { max-width: 600px; margin-bottom: 1.5rem; font-size: 1.2rem; background: rgba(0,0,0,0.5); padding: 1rem; border-radius: 10px; }
+      .btn { padding: 0.7rem 1.5rem; border: none; background: #0ff; color: #000; font-weight: bold; cursor: pointer; border-radius: 5px; }
+      .btn:hover { background: #09c; color: #fff; }
 
-    .hero {
-      height: 90vh; display: flex; flex-direction: column;
-      justify-content: center; align-items: center; text-align: center;
-      padding: 2rem;
-      background: url('https://images.unsplash.com/photo-1608379867233-70da6d56bb49') no-repeat center center/cover;
-    }
-    .hero h2 { font-size: 2.5rem; margin-bottom: 1rem; color: #0ff; }
+      section { padding: 3rem 2rem; }
+      .about, .services { max-width: 1000px; margin: auto; }
+      .about h3, .services h3 { color: #0ff; margin-bottom: 1rem; font-size: 1.8rem; }
 
-    .login-section { background: #111; padding: 3rem 2rem; text-align: center; }
-    .login-box {
-      background: #1a1a1a; padding: 2rem; max-width: 400px; margin: auto;
-      border-radius: 10px; box-shadow: 0 0 15px rgba(0,255,255,0.3);
-    }
-    .login-box h3 { margin-bottom: 1.5rem; color: #0ff; }
-    .login-box input {
-      width: 100%; padding: 0.7rem; margin: 0.5rem 0;
-      border: none; border-radius: 5px; background: #0f0f0f; color: #fff;
-    }
-    .login-box button { width: 100%; margin-top: 1rem; padding: .7rem; background: #0ff; border: none; color:#000;font-weight:bold; cursor:pointer; }
-    .login-box button:hover { background:#09c;color:#fff; }
-    .message { min-height:20px;margin-top:10px;font-weight:bold; }
+      .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; }
+      .card { background: #1a1a1a; padding: 1.5rem; border-radius: 10px; box-shadow: 0 0 10px rgba(0,255,255,0.3); }
+      .card h4 { margin-bottom: 0.5rem; color: #0ff; }
 
-    footer { background: #111; padding: 1rem; text-align: center; color: #888; }
+      .login-section { background: #111; padding: 3rem 2rem; text-align: center; }
+      .login-box, .signup-box { background: #1a1a1a; padding: 2rem; max-width: 400px; margin: auto; border-radius: 10px; box-shadow: 0 0 15px rgba(0,255,255,0.3); }
+      .login-box h3, .signup-box h3 { margin-bottom: 1.5rem; color: #0ff; }
+      .login-box input, .signup-box input { width: 100%; padding: 0.7rem; margin: 0.5rem 0; border: none; border-radius: 5px; }
+      .login-box button, .signup-box button { width: 100%; margin-top: 1rem; }
+      .message { margin-top: 10px; font-weight: bold; }
+      .toggle-link { margin-top: 10px; display: block; text-align: center; color: #0ff; cursor: pointer; }
+      .toggle-link:hover { text-decoration: underline; }
 
-    /* Cursor Shadow */
-    #cursor-shadow {
-      position: fixed; left: 0; top: 0; pointer-events: none;
-      z-index: 9999; mix-blend-mode: screen; transition: opacity .2s;
-    }
-    .blob {
-      position: absolute; width:140px; height:140px; border-radius:50%;
-      transform:translate(-50%,-50%); filter:blur(20px);
-    }
-    .b1 { background:rgba(0,255,255,0.3); width:180px;height:180px; }
-    .b2 { background:rgba(0,170,255,0.2); width:120px;height:120px; }
-    .b3 { background:rgba(0,120,200,0.15); width:80px;height:80px; }
-  </style>
-</head>
+      footer { background: #111; padding: 1rem; text-align: center; font-size: 0.9rem; color: #888; }
 
-<body>
-
-  <header>
-    <div style="display:flex;align-items:center;">
-      <img class="logo" src="https://drive.google.com/thumbnail?id=1cNHG2vlNgLNIHCVdKUl3oO1LpjUM5BWp">
-      <h1>IndSeo01 Industries</h1>
-    </div>
-    <nav>
-      <a href="#about">About</a>
-      <a href="#services">Services</a>
-      <a href="#login">Login</a>
-      <a href="#contact">Contact</a>
-    </nav>
-  </header>
-
-  <section class="hero">
-    <p><u>THIS WEBSITE IS UNDER MAINTENANCE</u></p>
-    <h2>Weapon Intelligence for the Future</h2>
-  </section>
-
-  <section id="login" class="login-section">
-    <div class="login-box">
-      <h3>Login</h3>
-      <input type="text" id="username" placeholder="Username">
-      <input type="password" id="password" placeholder="Password">
-      <button onclick="login()">Login</button>
-      <p class="message" id="login-message"></p>
-    </div>
-  </section>
-
-  <footer id="contact">
-    <p>Contact: Indseo01@outlook.com | © 2025 IndSeo01 Industries</p>
-  </footer>
-
-  <!-- Cursor shadow -->
-  <div id="cursor-shadow">
-    <div class="blob b1"></div>
-    <div class="blob b2"></div>
-    <div class="blob b3"></div>
-  </div>
-
-  <script>
-    // FIXED LOGIN CREDENTIALS
-    const USER = "core123";
-    const PASS = "core456";
-
-    function login() {
-      const u = document.getElementById("username").value.trim();
-      const p = document.getElementById("password").value.trim();
-
-      if (u === USER && p === PASS) {
-        document.getElementById("login-message").textContent = "Login Success... Redirecting";
-        document.getElementById("login-message").style.color = "lightgreen";
-        setTimeout(() => { window.location.href = "afterlogin.html"; }, 500);
-      } else {
-        document.getElementById("login-message").textContent = "Invalid username or password.";
-        document.getElementById("login-message").style.color = "red";
+      @media (max-width: 768px) {
+        .hero h2 { font-size: 1.8rem; }
+        .hero p { font-size: 1rem; }
       }
-    }
 
-    // Cursor follow animation
-    const cursor = document.getElementById("cursor-shadow");
-    window.addEventListener("mousemove", e => {
-      cursor.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
-    });
-  </script>
+      /* --- Cursor shadow styles (integrated) --- */
+      #cursor-shadow {
+        position: fixed;
+        left: 0;
+        top: 0;
+        pointer-events: none;
+        z-index: 9999;
+        mix-blend-mode: screen;
+        -webkit-transform: translate3d(0,0,0);
+        transform: translate3d(0,0,0);
+        will-change: transform;
+        transition: opacity 220ms ease;
+        opacity: 1;
+      }
+      .blob {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 140px;
+        height: 140px;
+        border-radius: 50%;
+        transform: translate3d(-50%, -50%, 0);
+        filter: blur(20px);
+        opacity: 0.6;
+        transition: opacity 220ms ease, transform 220ms linear;
+      }
+      .blob.b1 { background: rgba(0,255,255,0.22); width: 160px; height: 160px; filter: blur(26px); opacity: .55; }
+      .blob.b2 { background: rgba(0,170,255,0.18); width: 110px; height: 110px; filter: blur(18px); opacity: .45; }
+      .blob.b3 { background: rgba(0,120,200,0.12); width: 70px; height: 70px; filter: blur(10px); opacity: .35; }
 
-</body>
-</html>
+      #cursor-shadow.moving .blob { transform-origin: center; }
+
+      /* hide on small screens / touch devices to save CPU & not block taps */
+      @media (hover: none), (max-width: 880px) {
+        #cursor-shadow { display: none !important; }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="logo-container">
+        <img class="logo" src="https://drive.google.com/thumbnail?id=1cNHG2vlNgLNIHCVdKUl3oO1LpjUM5BWp" alt="IndSeo01 Logo">
+        <h1>IndSeo01 Industries</h1>
+      </div>
+      <nav>
+        <a href="#about">About</a>
+        <a href="#services">Services</a>
+        <a href="#login">Login</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
+
+    <section class="hero">
+      <p><u>THE WEBSITE IS CURRENTLY UNDER MAINTENANCE</u></p>
+      <h2>Weapon Intelligence for the Future</h2>
+      <p>IndSeo01 Industries pioneers in weapon intelligence solutions, combining advanced analytics, AI, and real-time defense technologies to secure tomorrow’s battlefield.</p>
+      <button class="btn">Explore More</button>
+    </section>
+
+    <section id="about" class="about">
+      <h3>About Us</h3>
+      <p>At IndSeo01 Industries, we focus on the research, design, and deployment of advanced weapon intelligence systems. Our mission is to merge data science and defense to empower nations with cutting-edge technology.</p>
+    </section>
+
+    <section id="services" class="services">
+      <h3>Our Services</h3>
+      <div class="services-grid">
+        <div class="card">
+          <h4>AI-Powered Surveillance</h4>
+          <p>Smart monitoring systems with predictive threat detection.</p>
+        </div>
+        <div class="card">
+          <h4>Autonomous Defense</h4>
+          <p>Weapon systems integrated with real-time decision making.</p>
+        </div>
+        <div class="card">
+          <h4>Cyber-Intelligence</h4>
+          <p>Cyber defense frameworks safeguarding critical weapon data.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="login" class="login-section">
+      <!-- Login Form -->
+      <div class="login-box" id="login-box">
+        <h3>Login</h3>
+        <input type="text" id="username" placeholder="Username" required />
+        <input type="password" id="password" placeholder="Password" required />
+        <button class="btn" onclick="login()">Login</button>
+        <p class="message" id="login-message"></p>
+      </div>
+    </section>
+
+    <footer id="contact">
+      <p>Contact: Indseo01@outlook.com | © 2025 IndSeo01 Industries</p>
+    </footer>
+
+    <!-- Cursor shadow element (kept at the end for layering) -->
+    <div id="cursor-shadow" aria-hidden="true">
+      <div class="blob b1"></div>
+      <div class="blob b2"></div>
+      <div class="blob b3"></div>
+    </div>
+
+    <script>
+      // Toggle between Login and Sign-Up forms
+      function showSignUp() {
+        document.getElementById('login-box').style.display = 'none';
+        document.getElementById('signup-box').style.display = 'block';
+      }
+
+      function showLogin() {
+        document.getElementById('signup-box').style.display = 'none';
+        document.getElementById('login-box').style.display = 'block';
+      }
+
+      // Login Function
+function login() {
+  const username = document.getElementById('username').value.trim();
+  const password = document.getElementById('password').value.trim();
+
+  if (username === "core123" && password === "core456") {
+    document.getElementById('login-message').textContent = "Login successful! Redirecting...";
+    document.getElementById('login-message').style.color = "lightgreen";
+
+    setTimeout(() => {
+      window.location.href = "afterlogin.html";  // Same folder
+    }, 500);
+
+  } else {
+    document.getElementById('login-message').textContent = "Invalid username or password.";
+    document.getElementById('login-message').style.color = "red";
+  }
+}
+
+    </script>
+
+    <!-- Cursor shadow script -->
+    <script>
+      (function(){
+        const speeds = { b1: 0.18, b2: 0.28, b3: 0.42 };
+        const pointer = { x: window.innerWidth/2, y: window.innerHeight/2 };
+        const blobs = {};
+
+        const container = document.getElementById('cursor-shadow');
+        if (!container) return;
+
+        blobs.b1 = container.querySelector('.b1');
+        blobs.b2 = container.querySelector('.b2');
+        blobs.b3 = container.querySelector('.b3');
+
+        const pos = {
+          b1: { x: pointer.x, y: pointer.y },
+          b2: { x: pointer.x, y: pointer.y },
+          b3: { x: pointer.x, y: pointer.y }
+        };
+
+        let lastMoveTime = Date.now();
+
+        // update pointer on mouse move
+        window.addEventListener('mousemove', (e) => {
+          pointer.x = e.clientX;
+          pointer.y = e.clientY;
+          lastMoveTime = Date.now();
+          container.classList.add('moving');
+          // ensure visible when moving
+          container.style.opacity = '1';
+        }, { passive: true });
+
+        // hide the shadow when mouse leaves the window
+        window.addEventListener('mouseout', (e) => {
+          if (!e.relatedTarget && !e.toElement) {
+            container.style.opacity = '0';
+          }
+        });
+        window.addEventListener('mouseenter', () => {
+          container.style.opacity = '1';
+        });
+
+        // hide while input focused (so the user isn't distracted while typing)
+        document.addEventListener('focusin', (e) => {
+          if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') {
+            container.style.opacity = '0';
+          }
+        });
+        document.addEventListener('focusout', (e) => {
+          // small delay so it doesn't flicker when switching inputs
+          setTimeout(() => { container.style.opacity = '1'; }, 120);
+        });
+
+        function lerp(a, b, t) { return a + (b - a) * t; }
+
+        function animate() {
+          pos.b1.x = lerp(pos.b1.x, pointer.x, speeds.b1);
+          pos.b1.y = lerp(pos.b1.y, pointer.y, speeds.b1);
+
+          pos.b2.x = lerp(pos.b2.x, pointer.x, speeds.b2);
+          pos.b2.y = lerp(pos.b2.y, pointer.y, speeds.b2);
+
+          pos.b3.x = lerp(pos.b3.x, pointer.x, speeds.b3);
+          pos.b3.y = lerp(pos.b3.y, pointer.y, speeds.b3);
+
+          blobs.b1.style.transform = `translate3d(${pos.b1.x}px, ${pos.b1.y}px, 0) translate(-50%,-50%)`;
+          blobs.b2.style.transform = `translate3d(${pos.b2.x}px, ${pos.b2.y}px, 0) translate(-50%,-50%)`;
+          blobs.b3.style.transform = `translate3d(${pos.b3.x}px, ${pos.b3.y}px, 0) translate(-50%,-50%)`;
+
+          if (Date.now() - lastMoveTime > 120) {
+            container.classList.remove('moving');
+          }
+
+          requestAnimationFrame(animate);
+        }
+
+        function init() {
+          const cx = window.innerWidth / 2;
+          const cy = window.innerHeight / 2;
+          pointer.x = cx; pointer.y = cy;
+          pos.b1.x = cx; pos.b1.y = cy;
+          pos.b2.x = cx; pos.b2.y = cy;
+          pos.b3.x = cx; pos.b3.y = cy;
+          container.style.opacity = '1';
+          requestAnimationFrame(animate);
+        }
+
+        init();
+
+        // adapt gracefully on resize
+        window.addEventListener('resize', () => {
+          // keep things stable — no heavy recalculations needed
+        });
+      })();
+    </script>
+  </body>
+  </html>
