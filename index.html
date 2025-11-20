@@ -44,6 +44,43 @@
       .hero h2 { font-size: 1.8rem; }
       .hero p { font-size: 1rem; }
     }
+
+    /* --- Cursor shadow styles (integrated) --- */
+    #cursor-shadow {
+      position: fixed;
+      left: 0;
+      top: 0;
+      pointer-events: none;
+      z-index: 9999;
+      mix-blend-mode: screen;
+      -webkit-transform: translate3d(0,0,0);
+      transform: translate3d(0,0,0);
+      will-change: transform;
+      transition: opacity 220ms ease;
+      opacity: 1;
+    }
+    .blob {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      transform: translate3d(-50%, -50%, 0);
+      filter: blur(20px);
+      opacity: 0.6;
+      transition: opacity 220ms ease, transform 220ms linear;
+    }
+    .blob.b1 { background: rgba(0,255,255,0.22); width: 160px; height: 160px; filter: blur(26px); opacity: .55; }
+    .blob.b2 { background: rgba(0,170,255,0.18); width: 110px; height: 110px; filter: blur(18px); opacity: .45; }
+    .blob.b3 { background: rgba(0,120,200,0.12); width: 70px; height: 70px; filter: blur(10px); opacity: .35; }
+
+    #cursor-shadow.moving .blob { transform-origin: center; }
+
+    /* hide on small screens / touch devices to save CPU & not block taps */
+    @media (hover: none), (max-width: 880px) {
+      #cursor-shadow { display: none !important; }
+    }
   </style>
 </head>
 <body>
@@ -61,7 +98,7 @@
   </header>
 
   <section class="hero">
-    <p><U>THE WEBSITE IS CURRENTLY UNDER MAINTAINANCE </U></p>
+    <p><u>THE WEBSITE IS CURRENTLY UNDER MAINTENANCE</u></p>
     <h2>Weapon Intelligence for the Future</h2>
     <p>IndSeo01 Industries pioneers in weapon intelligence solutions, combining advanced analytics, AI, and real-time defense technologies to secure tomorrow’s battlefield.</p>
     <button class="btn">Explore More</button>
@@ -113,8 +150,15 @@
   </section>
 
   <footer id="contact">
-    <p>Contact: Indseo01@outlook.com.com | © 2025 IndSeo01 Industries</p>
+    <p>Contact: Indseo01@outlook.com | © 2025 IndSeo01 Industries</p>
   </footer>
+
+  <!-- Cursor shadow element (kept at the end for layering) -->
+  <div id="cursor-shadow" aria-hidden="true">
+    <div class="blob b1"></div>
+    <div class="blob b2"></div>
+    <div class="blob b3"></div>
+  </div>
 
   <script>
     // Toggle between Login and Sign-Up forms
@@ -163,6 +207,102 @@
         document.getElementById('signup-message').style.color = "red";
       }
     }
+  </script>
+
+  <!-- Cursor shadow script -->
+  <script>
+    (function(){
+      const speeds = { b1: 0.18, b2: 0.28, b3: 0.42 };
+      const pointer = { x: window.innerWidth/2, y: window.innerHeight/2 };
+      const blobs = {};
+
+      const container = document.getElementById('cursor-shadow');
+      if (!container) return;
+
+      blobs.b1 = container.querySelector('.b1');
+      blobs.b2 = container.querySelector('.b2');
+      blobs.b3 = container.querySelector('.b3');
+
+      const pos = {
+        b1: { x: pointer.x, y: pointer.y },
+        b2: { x: pointer.x, y: pointer.y },
+        b3: { x: pointer.x, y: pointer.y }
+      };
+
+      let lastMoveTime = Date.now();
+
+      // update pointer on mouse move
+      window.addEventListener('mousemove', (e) => {
+        pointer.x = e.clientX;
+        pointer.y = e.clientY;
+        lastMoveTime = Date.now();
+        container.classList.add('moving');
+        // ensure visible when moving
+        container.style.opacity = '1';
+      }, { passive: true });
+
+      // hide the shadow when mouse leaves the window
+      window.addEventListener('mouseout', (e) => {
+        if (!e.relatedTarget && !e.toElement) {
+          container.style.opacity = '0';
+        }
+      });
+      window.addEventListener('mouseenter', () => {
+        container.style.opacity = '1';
+      });
+
+      // hide while input focused (so the user isn't distracted while typing)
+      document.addEventListener('focusin', (e) => {
+        if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') {
+          container.style.opacity = '0';
+        }
+      });
+      document.addEventListener('focusout', (e) => {
+        // small delay so it doesn't flicker when switching inputs
+        setTimeout(() => { container.style.opacity = '1'; }, 120);
+      });
+
+      function lerp(a, b, t) { return a + (b - a) * t; }
+
+      function animate() {
+        pos.b1.x = lerp(pos.b1.x, pointer.x, speeds.b1);
+        pos.b1.y = lerp(pos.b1.y, pointer.y, speeds.b1);
+
+        pos.b2.x = lerp(pos.b2.x, pointer.x, speeds.b2);
+        pos.b2.y = lerp(pos.b2.y, pointer.y, speeds.b2);
+
+        pos.b3.x = lerp(pos.b3.x, pointer.x, speeds.b3);
+        pos.b3.y = lerp(pos.b3.y, pointer.y, speeds.b3);
+
+        blobs.b1.style.transform = `translate3d(${pos.b1.x}px, ${pos.b1.y}px, 0) translate(-50%,-50%)`;
+        blobs.b2.style.transform = `translate3d(${pos.b2.x}px, ${pos.b2.y}px, 0) translate(-50%,-50%)`;
+        blobs.b3.style.transform = `translate3d(${pos.b3.x}px, ${pos.b3.y}px, 0) translate(-50%,-50%)`;
+
+        if (Date.now() - lastMoveTime > 120) {
+          container.classList.remove('moving');
+        }
+
+        requestAnimationFrame(animate);
+      }
+
+      function init() {
+        const cx = window.innerWidth / 2;
+        const cy = window.innerHeight / 2;
+        pointer.x = cx; pointer.y = cy;
+        pos.b1.x = cx; pos.b1.y = cy;
+        pos.b2.x = cx; pos.b2.y = cy;
+        pos.b3.x = cx; pos.b3.y = cy;
+        container.style.opacity = '1';
+        requestAnimationFrame(animate);
+      }
+
+      init();
+
+      // adapt gracefully on resize
+      window.addEventListener('resize', () => {
+        // keep things stable — no heavy recalculations needed
+      });
+    })();
   </script>
 </body>
 </html>
