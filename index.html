@@ -3,9 +3,19 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title  href="https://indseo01.com/" >IndSeo01 Industries</title>
+    <title>IndSeo01 Industries</title>
     <link rel="icon" type="image/png" href="https://drive.google.com/thumbnail?id=1cNHG2vlNgLNIHCVdKUl3oO1LpjUM5BWp">
     <style>
+      #home-link {
+         color: #0ff;
+         text-decoration: none;
+         }
+ 
+         #home-link:hover {
+         color: white;
+         text-shadow: 0 0 10px cyan;
+          }
+
       * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
       body { background: #0f0f0f; color: #f5f5f5; line-height: 1.6; }
       header { background: #111; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center;; position: fixed; top: 0; left: 0; right: 0; width: 100%; z-index: 999; }
@@ -87,7 +97,10 @@
     <header>
       <div class="logo-container">
         <img class="logo" src="https://drive.google.com/thumbnail?id=1cNHG2vlNgLNIHCVdKUl3oO1LpjUM5BWp" alt="IndSeo01 Logo">
-        <h1>IndSeo01 Industries</h1>
+        <h1>
+        <a href="index.html" id="home-link">IndSeo01 Industries</a>
+       </h1>
+
       </div>
       <nav>
         <a href="#about">About</a>
